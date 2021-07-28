@@ -45,7 +45,6 @@ function setCity(){
 
 function handleModelCart(e){
     const el = e.target;
-    console.log("hi");
 
     if(el.matches('.cart__btn-close') || el.matches('.cart-overlay')){
         closeModalCart();
@@ -221,6 +220,15 @@ try{
             }
 
             const cardDataTrash = getLocalStorage();
+            if(cardDataTrash.reduce((check, item) => {
+                if(item.id === data.id){
+                    return true
+                }
+            }, false))
+            {
+                alert("Данный товар уже есть в вашей корзине!");
+                return
+            }
             cardDataTrash.push(data);
             setLocalStorage(cardDataTrash);
         })
